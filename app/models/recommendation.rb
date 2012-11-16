@@ -16,10 +16,10 @@ class Recommendation < ApiModel
     Date.parse(@createddate) if @createddate
   end
 
-  # has_one :member
-  # Note that we're not using the member data in the json because it
+  # has_one :from
+  # Note that we're not using the from data in the json because it
   # lacks many attributes. We simply just do another api call
-  def member
+  def from
     Member.find @from.name
   end
 
