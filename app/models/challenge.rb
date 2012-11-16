@@ -56,10 +56,11 @@ class Challenge < ApiModel
 
   # has_many :participants
   # Note that we're not using the participants data in the json because it
-  # lacks many attributes. We simply just do another api call
+  # lacks many attributes. We simply just do another api call.
+  # Also, note that we're assigning the challenge field to self
   def participants
     self.class.raw_get([challenge_id, 'participants'].join('/')).map do |participant|
-      Participant.new participant
+      Participant.new(participant).tap { |p| p.challenge = self} 
     end
   end
 
