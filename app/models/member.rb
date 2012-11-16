@@ -19,7 +19,7 @@ class Member < ApiModel
 
   # habtm :challenges
   def challenges
-    self.class.raw_get([name, 'challenges'].join('/')).map do |challenge|
+    self.class.raw_get([name, 'challenges']).map do |challenge|
       Challenge.new challenge
     end
   end

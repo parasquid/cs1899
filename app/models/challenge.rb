@@ -53,7 +53,7 @@ class Challenge < ApiModel
   # lacks many attributes. We simply just do another api call.
   # Also, note that we're assigning the challenge field to self
   def participants
-    self.class.raw_get([challenge_id, 'participants'].join('/')).map do |participant|
+    self.class.raw_get([challenge_id, 'participants']).map do |participant|
       Participant.new(participant).tap { |p| p.challenge = self} 
     end
   end

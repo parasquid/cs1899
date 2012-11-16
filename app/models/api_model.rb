@@ -11,7 +11,7 @@ class ApiModel
     # dynamically create a method on this instance that will reference the collection
     define_method(entity.to_sym) do
       klass = entity.to_s.classify.constantize
-      klass.raw_get([to_param, entity.to_s].join('/')).map do |e|
+      klass.raw_get([to_param, entity.to_s]).map do |e|
         klass.new e
       end
     end
@@ -71,8 +71,9 @@ class ApiModel
   end
 
   # Convenience method to request an entity from the CloudSpokes RESTful source
-  def self.raw_get(entity = '')
-    endpoint = "#{api_endpoint}/#{entity}"
+  def self.raw_get(entities = [])
+    entities = Array.new(1, entities) unless entities.respond_to? :join
+    endpoint = "#{api_endpoint}/#{entities.join('/')}"
     Rails.cache.fetch("#{endpoint}", expires_in: ENDPOINT_EXPIRY.minutes) do
       Hashie::Mash.new(JSON.parse(RestClient.get "#{endpoint}"))
       .response # we're only interested in the response portion of the reply
