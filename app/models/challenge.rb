@@ -3,7 +3,7 @@ class Challenge < ApiModel
     :prize_type, :total_prize_money, :top_prize,
     :start_date, :end_date,
     :name, :description, :status,
-    :categories, :participants
+    :categories, :participants, :comments, :status
 
   # Cleanup up the __r convention
   def initialize(params={})
@@ -51,6 +51,12 @@ class Challenge < ApiModel
     self.class.raw_get([challenge_id, 'participants'].join('/')).map do |participant|
       Participant.new participant
     end
+  end
+
+  # has_one :status
+  # TODO (this requires authemtication)
+  def status
+    ''
   end
 
 end

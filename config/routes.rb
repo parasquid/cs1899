@@ -15,9 +15,10 @@ ParasquidCs1899::Application.routes.draw do
   get 'challenges/closed'
   get 'challenges/recent'
   resources :challenges, only: [:index, :create, :show, :update] do
-    get 'comments'
-    get 'participants'
-    post 'survey'
+    member do
+      get 'comments'
+      get 'registrants'
+    end
   end
 
   mount_sextant if Rails.env.development? # https://github.com/schneems/sextant

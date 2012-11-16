@@ -1,6 +1,8 @@
 class ApiModel
   include ActiveModel::Model
 
+  ENDPOINT_EXPIRY = APP_CONFIG[:expiry]
+
   # Overrides the attr_accesssor class method so we are able to capture and
   # then save the defined fields as column_names
   def self.attr_accessor(*vars)
@@ -39,8 +41,14 @@ class ApiModel
 
   # Wrap initialize with a sanitation clause
   def initialize(params={})
+    @raw_data = params
     params.delete_if {|k, v| !self.class.column_names.include? k.to_sym}
     super(params)
+  end
+
+  # Returns the raw data that created this object
+  def raw_data
+    @raw_data
   end
 
   # Returns if this record has the id attribute set (used by url_for for routing)
@@ -50,8 +58,11 @@ class ApiModel
 
   # Convenience method to request an entity from the CloudSpokes RESTful source
   def self.raw_get(entity = '')
-   # we're only interested in the response portion of the reply
-    Hashie::Mash.new(JSON.parse(RestClient.get "#{api_endpoint}/#{entity}")).response
+    endpoint = "#{api_endpoint}/#{entity}"
+    Rails.cache.fetch("#{endpoint}", expires_in: ENDPOINT_EXPIRY.minutes) do
+      Hashie::Mash.new(JSON.parse(RestClient.get "#{endpoint}"))
+      .response # we're only interested in the response portion of the reply
+    end
   end
 
   # Sanitized response to only the attributes we've defined

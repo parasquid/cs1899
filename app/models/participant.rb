@@ -18,6 +18,11 @@ class Participant < ApiModel
     Member.find(@member.name)
   end
 
+  # Typecast into Boolean
+  def has_submission
+    !!@has_submission
+  end
+
 end
 
 # http://cs-api-sandbox.herokuapp.com/v1/challenges/8/participants
