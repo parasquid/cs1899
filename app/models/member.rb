@@ -1,14 +1,6 @@
-class Member
-  include ActiveModel::Model
-
-  def self.attr_accessor(*vars)
-    @column_names ||= []
-    @column_names.concat( vars )
-    super
-  end
-
-  def self.column_names
-    @column_names
+class Member < ApiModel
+  def to_param
+    name
   end
 
   attr_accessor :id, :name, :profile_pic, :attributes,
@@ -17,25 +9,22 @@ class Member
     :total_wins, :total_public_money,
     :summary_bio
 
-  API_ENDPOINT = APP_CONFIG[:cs_api][:members]
-
-  def self.all
-    Hashie::Mash.new(JSON.parse(RestClient.get APP_CONFIG[:cs_api][:members])).response.map do |member|
-      Member.new(member.to_hash)
-    end
+  def self.api_endpoint
+    APP_CONFIG[:cs_api][:members]
   end
 
   def self.find(member_name)
-    member = Hashie::Mash.new(JSON.parse(RestClient.get "#{APP_CONFIG[:cs_api][:members]}/#{member_name}")).response
-    m = Member.new(member.to_hash.delete_if {|k, v| !column_names.include? k.to_sym})
+    member = Hashie::Mash.new(JSON.parse(RestClient.get "#{api_endpoint}/#{member_name}")).response
+    Member.new(member.to_hash.delete_if {|k, v| !column_names.include? k.to_sym})
   end
 
-  def persisted?
-    !!id
+  def challenges
   end
 
-  def to_param
-    name
+  def recommendations
+  end
+
+  def payments
   end
 
 end
