@@ -10,7 +10,8 @@ class ChallengesController < ApplicationController
   def comments
   end
 
-  def participants
+  def registrants
+    @participants = Challenge.find(params[:id]).participants
   end
 
   def survey
