@@ -196,7 +196,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activemodel (= 3.2.8)
   bootstrap-sass (= 2.0.4.2)
   coffee-rails (~> 3.2.1)
   devise (~> 2.0.0)
