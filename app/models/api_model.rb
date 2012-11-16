@@ -35,7 +35,7 @@ class ApiModel
   # Wrap initialize with a sanitation clause
   def initialize(params={})
     params.delete_if {|k, v| !self.class.column_names.include? k.to_sym}
-    super
+    super(params)
   end
 
   # Returns if this record has the id attribute set (used by url_for for routing)

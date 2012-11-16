@@ -13,6 +13,7 @@ class Member < ApiModel
     Member.new(raw_get entity)
   end
 
+  # Used for resourceful routes (instead of id)
   def to_param
     name
   end
@@ -33,6 +34,8 @@ class Member < ApiModel
   end
 
 end
+
+# http://cs-api-sandbox.herokuapp.com/v1/members/cloudspokes-rspec-1
 
 # {
 #     "attributes": {
