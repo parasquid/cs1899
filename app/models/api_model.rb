@@ -4,30 +4,11 @@ class ApiModel
   ENDPOINT_EXPIRY = APP_CONFIG[:expiry]
 
   # Implements the has_many relationship
-  def self.has_many(entity)
-    # add in this relationship to the column_names table
-    @column_names << entity.to_sym
-
-    # dynamically create a method on this instance that will reference the collection
-    define_method("#{entity.to_sym}=") do |accessor_value|
-      instance_variable_set("@#{entity.to_sym}", accessor_value)
-    end
-
-    define_method(entity.to_sym) do
-      klass = entity.to_s.classify.constantize
-      klass.raw_get([to_param, entity.to_s]).map do |e|
-        next if e.respond_to?(:last) # we got an array instead of a Hashie::Mash
-        klass.new e
-      end
-    end
-  end
-
-  # Implements the has and belongs to many relationship
   # Passing :parent as an option allows modification of the calling class
   # This is used mostly for has and belongs to many relationships, where
   # a model collection will have a different endpoint
   # Case in point: Members and Challenges
-  def self.habtm(entity, options = {})
+  def self.has_many(entity, options={})
     # add in this relationship to the column_names table
     @column_names << entity.to_sym
     parent = options[:parent]

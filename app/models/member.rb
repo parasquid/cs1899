@@ -6,7 +6,7 @@ class Member < ApiModel
     :summary_bio, :payments
 
   has_many :recommendations
-  habtm :challenges, parent: Member
+  has_many :challenges, parent: Member
 
   def self.api_endpoint
     APP_CONFIG[:cs_api][:members]
