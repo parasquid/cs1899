@@ -9,8 +9,8 @@ class Member < ApiModel
     APP_CONFIG[:cs_api][:members]
   end
 
-  def self.find(member_name)
-    Member.new(get member_name)
+  def self.find(entity)
+    Member.new(raw_get entity)
   end
 
   def to_param
@@ -19,7 +19,7 @@ class Member < ApiModel
 
   # habtm :challenges
   def challenges
-    self.class.raw_get([self.name, 'challenges'].join('/')).map do |challenge|
+    self.class.raw_get([name, 'challenges'].join('/')).map do |challenge|
       Challenge.new challenge
     end
   end

@@ -14,12 +14,6 @@ class ApiModel
     @column_names
   end
 
-  # Wrap initialize with a sanitation clause
-  def initialize(params={})
-    params.delete_if {|k, v| !self.class.column_names.include? k.to_sym}
-    super
-  end
-
   # Returns the api_endpoint. Note that you need to implement this method
   # in the child object
   def self.api_endpoint
@@ -28,7 +22,7 @@ class ApiModel
 
   # Returns all the records from the CloudSpokes API
   def self.all
-    raw_get.map { |item| self.new item }
+    raw_get.map { |item| new item }
   end
 
   # Returns the first record
@@ -38,12 +32,16 @@ class ApiModel
     all.first
   end
 
+  # Wrap initialize with a sanitation clause
+  def initialize(params={})
+    params.delete_if {|k, v| !self.class.column_names.include? k.to_sym}
+    super
+  end
+
   # Returns if this record has the id attribute set (used by url_for for routing)
   def persisted?
     !!id
   end
-
-  protected
 
   # Convenience method to request an entity from the CloudSpokes RESTful source
   def self.raw_get(entity = '')
