@@ -1,3 +1,5 @@
+heroku apps:create <my-app>
+heroku addons:add heroku-postgresql:dev
 heroku run rake db:version
 heroku run rake --trace db:migrate
 heroku restart
