@@ -1,0 +1,14 @@
+<table class='table table-striped'>
+  <thead>
+    <tr>
+      <% Member.column_names.each do |column| %>
+      <% puts column.inspect %>
+        <th><%= column.to_s.humanize %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @members %>
+  </tbody>
+
+</table>

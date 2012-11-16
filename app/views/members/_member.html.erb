@@ -1,0 +1,5 @@
+<tr>
+  <% Member.column_names.each do |column| %>
+    <td><%= member.send(column) %></td>
+  <% end %>
+</tr>
