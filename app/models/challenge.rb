@@ -43,7 +43,7 @@ class Challenge < ApiModel
 
   # TODO: blow up the categories into something useful
   def categories
-    @categories
+    @categories || 'nil'
   end
 
   # has_many :comments
@@ -67,7 +67,7 @@ class Challenge < ApiModel
   # has_one :status
   # TODO (this requires authemtication)
   def status
-    ''
+    'nil'
   end
 
 end
