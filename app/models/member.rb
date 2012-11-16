@@ -20,13 +20,9 @@ class Member
   API_ENDPOINT = APP_CONFIG[:cs_api][:members]
 
   def self.all
-    result = []
-    Hashie::Mash.new(JSON.parse(RestClient.get APP_CONFIG[:cs_api][:members])).response.each do |member|
-      #result << Member.new(name: 'tristan', challenges_entered: 4)
-      puts member.to_hash.inspect
-      result << Member.new(member.to_hash)
+    Hashie::Mash.new(JSON.parse(RestClient.get APP_CONFIG[:cs_api][:members])).response.map do |member|
+      Member.new(member.to_hash)
     end
-    result
   end
 
 end
