@@ -3,6 +3,20 @@ class ApiModel
 
   ENDPOINT_EXPIRY = APP_CONFIG[:expiry]
 
+  # Implements the has_many relationship
+  def self.has_many(entity)
+    # add in this relationship to the column_names table
+    @column_names << entity.to_sym
+
+    # dynamically create a method on this instance that will reference the collection
+    define_method(entity.to_sym) do
+      klass = entity.to_s.classify.constantize
+      klass.raw_get([to_param, entity.to_s].join('/')).map do |e|
+        klass.new e
+      end
+    end
+  end
+
   # Overrides the attr_accesssor class method so we are able to capture and
   # then save the defined fields as column_names
   def self.attr_accessor(*vars)

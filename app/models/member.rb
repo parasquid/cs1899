@@ -4,7 +4,9 @@ class Member < ApiModel
     :total_1st_place, :total_2nd_place, :total_3st_place,
     :total_wins, :total_public_money,
     :summary_bio,
-    :recommendations, :payments
+    :payments
+
+  has_many :recommendations
 
   def self.api_endpoint
     APP_CONFIG[:cs_api][:members]
@@ -22,17 +24,11 @@ class Member < ApiModel
     end
   end
 
-  # has_many :recommendations
-  # Note that the json does not expose this method
-  def recommendations
-    ''
-  end
-
   # has_many :payments
   # Note that the json does not expose this method
   # TODO (this requires authentication)
   def payments
-    ''
+    'nil'
   end
 
 end

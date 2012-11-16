@@ -3,7 +3,9 @@ class Challenge < ApiModel
     :prize_type, :total_prize_money, :top_prize,
     :start_date, :end_date,
     :name, :description, :status,
-    :categories, :participants, :comments, :status
+    :categories, :participants, :status
+
+  has_many :comments
 
   # Cleanup up the __r convention
   def initialize(params={})
@@ -46,14 +48,6 @@ class Challenge < ApiModel
     @categories || 'nil'
   end
 
-  # has_many :comments
-  # Note that the json does not expose this method
-  def comments
-    self.class.raw_get([challenge_id, 'comments'].join('/')).map do |comment|
-      Comment.new comment
-    end
-  end
-
   # has_many :participants
   # Note that we're not using the participants data in the json because it
   # lacks many attributes. We simply just do another api call.
@@ -65,7 +59,7 @@ class Challenge < ApiModel
   end
 
   # has_one :status
-  # TODO (this requires authemtication)
+  # TODO (this requires authentication)
   def status
     'nil'
   end
