@@ -16,7 +16,7 @@ class Recommendation < ApiModel
     Date.parse(@createddate) if @createddate
   end
 
-  # has_one :from
+  # has_many :from
   # Note that we're not using the from data in the json because it
   # lacks many attributes. We simply just do another api call
   def from
