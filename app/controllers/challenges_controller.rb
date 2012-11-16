@@ -1,8 +1,10 @@
 class ChallengesController < ApplicationController
   def closed
+    @challenges = Challenge.closed
   end
 
   def recent
+    @challenges = Challenge.closed
   end
 
   def comments
@@ -15,6 +17,7 @@ class ChallengesController < ApplicationController
   end
 
   def index
+    @challenges = Challenge.all
   end
 
   def show

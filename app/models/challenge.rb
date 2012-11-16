@@ -21,6 +21,16 @@ class Challenge < ApiModel
     challenge_id
   end
 
+  # Returns all the closed challenges
+  def self.closed
+    raw_get('closed').map {|challenge| Challenge.new challenge}
+  end
+
+  # Returns all the recent challenges
+  def self.recent
+    raw_get('recent').map {|challenge| Challenge.new challenge}
+  end
+
   # Return an object instead of a string
   def start_date
     Date.parse(@start_date)
