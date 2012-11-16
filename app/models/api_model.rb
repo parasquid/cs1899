@@ -76,7 +76,7 @@ class ApiModel
 
   # Wrap initialize with a sanitation clause
   def initialize(params={})
-    @raw_data = params
+    @raw_data = params.dup
     params.delete_if {|k, v| !self.class.column_names.include? k.to_sym}
     super(params)
   end

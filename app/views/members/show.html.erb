@@ -27,3 +27,18 @@
     <%= render @member.challenges %>
   </tbody>
 </table>
+
+<h2>Recommendations</h2>
+
+<table class='table table-striped'>
+  <thead>
+    <tr>
+      <% Recommendation.column_names.each do |column| %>
+        <th><%= column.to_s.humanize %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @member.recommendations %>
+  </tbody>
+</table>
