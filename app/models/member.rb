@@ -25,22 +25,3 @@ class Member < ApiModel
   end
 
 end
-
-# http://cs-api-sandbox.herokuapp.com/v1/members/cloudspokes-rspec-1
-
-# {
-#     "attributes": {
-#         "type": "Member__c",
-#         "url": "/services/data/v22.0/sobjects/Member__c/a0IJ0000000eil5MAA"
-#     },
-#     "name": "cloudspokes-rspec-1",
-#     "challenges_entered": 0,
-#     "total_2nd_place": 0,
-#     "active_challenges": 0,
-#     "total_1st_place": 0,
-#     "id": "a0IJ0000000eil5MAA",
-#     "total_wins": 0,
-#     "total_public_money": 0.0,
-#     "total_3st_place": 0,
-#     "profile_pic": "http://cloudspokes.s3.amazonaws.com/Cloud_th_100.jpg"
-# },

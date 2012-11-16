@@ -9,6 +9,10 @@ class ApiModel
     @column_names << entity.to_sym
 
     # dynamically create a method on this instance that will reference the collection
+    define_method("#{entity.to_sym}=") do |accessor_value|
+      instance_variable_set("@#{entity.to_sym}", accessor_value)
+    end
+
     define_method(entity.to_sym) do
       klass = entity.to_s.classify.constantize
       klass.raw_get([to_param, entity.to_s]).map do |e|
@@ -29,6 +33,10 @@ class ApiModel
     parent = options[:parent]
 
     # dynamically create a method on this instance that will reference the collection
+    define_method("#{entity.to_sym}=") do |accessor_value|
+      instance_variable_set("@#{entity.to_sym}", accessor_value)
+    end
+
     define_method(entity.to_sym) do
       klass = entity.to_s.classify.constantize
       (parent || klass).raw_get([to_param, entity.to_s]).map do |e|

@@ -24,26 +24,3 @@ class Recommendation < ApiModel
   end
 
 end
-
-# http://cs-api-sandbox.herokuapp.com/v1/members/jeffdonthemic/recommendations
-
-# {
-#     "attributes": {
-#         "type": "Recommendation__c",
-#         "url": "/services/data/v22.0/sobjects/Recommendation__c/a0QJ0000000ORWsMAO"
-#     },
-#     "member": "a0IJ0000000d0r8MAA",
-#     "recommendation": "my comment",
-#     "createddate": "2012-10-12T12:57:14.000+0000",
-#     "id": "a0QJ0000000ORWsMAO",
-#     "recommendation_from": "a0IJ0000000d0rAMAQ",
-#     "recommendation_from__r": {
-#         "attributes": {
-#             "type": "Member__c",
-#             "url": "/services/data/v22.0/sobjects/Member__c/a0IJ0000000d0rAMAQ"
-#         },
-#         "name": "mess",
-#         "id": "a0IJ0000000d0rAMAQ",
-#         "profile_pic": "http://cloudspokes.s3.amazonaws.com/Cloud_th_100.jpg"
-#     }
-# },
