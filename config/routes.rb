@@ -4,10 +4,12 @@ ParasquidCs1899::Application.routes.draw do
 
   get 'members/search'
   resources :members, only: [:index, :show, :update] do
-    get 'challenges'
-    get 'payments'
-    get 'recommendations'
-    match 'recommendations' => 'members#create_recommendations', via: [:post]
+    member do
+      get 'challenges'
+      get 'payments'
+      get 'recommendations'
+      match 'recommendations' => 'members#create_recommendations', via: [:post]
+    end
   end
 
   get 'challenges/closed'

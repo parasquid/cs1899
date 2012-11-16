@@ -1,8 +1,4 @@
 class Member < ApiModel
-  def to_param
-    name
-  end
-
   attr_accessor :id, :name, :profile_pic, :attributes,
     :challenges_entered, :active_challenges,
     :total_1st_place, :total_2nd_place, :total_3st_place,
@@ -14,12 +10,18 @@ class Member < ApiModel
   end
 
   def self.find(member_name)
-    member = Hashie::Mash.new(JSON.parse(RestClient.get "#{api_endpoint}/#{member_name}")).response
-    Member.new(member.delete_if {|k, v| !column_names.include? k.to_sym})
+    Member.new(get member_name)
   end
 
-  # has_many :challenges
+  def to_param
+    name
+  end
+
+  # habtm :challenges
   def challenges
+    self.class.raw_get([self.name, 'challenges'].join('/')).map do |challenge|
+      Challenge.new challenge
+    end
   end
 
   # has_many :recommendations
