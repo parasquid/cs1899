@@ -15,15 +15,18 @@ class Member < ApiModel
 
   def self.find(member_name)
     member = Hashie::Mash.new(JSON.parse(RestClient.get "#{api_endpoint}/#{member_name}")).response
-    Member.new(member.to_hash.delete_if {|k, v| !column_names.include? k.to_sym})
+    Member.new(member.delete_if {|k, v| !column_names.include? k.to_sym})
   end
 
+  # has_many :challenges
   def challenges
   end
 
+  # has_many :recommendations
   def recommendations
   end
 
+  # has_many :payments
   def payments
   end
 
