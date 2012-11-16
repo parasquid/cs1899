@@ -3,10 +3,10 @@ class Member < ApiModel
     :challenges_entered, :active_challenges,
     :total_1st_place, :total_2nd_place, :total_3st_place,
     :total_wins, :total_public_money,
-    :summary_bio,
-    :payments
+    :summary_bio, :payments
 
   has_many :recommendations
+  habtm :challenges, parent: Member
 
   def self.api_endpoint
     APP_CONFIG[:cs_api][:members]
@@ -15,13 +15,6 @@ class Member < ApiModel
   # Used for resourceful routes (instead of id)
   def to_param
     name
-  end
-
-  # habtm :challenges
-  def challenges
-    self.class.raw_get([name, 'challenges']).map do |challenge|
-      Challenge.new challenge
-    end
   end
 
   # has_many :payments

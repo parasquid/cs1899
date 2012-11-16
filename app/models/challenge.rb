@@ -35,12 +35,12 @@ class Challenge < ApiModel
 
   # Return an object instead of a string
   def start_date
-    Date.parse(@start_date)
+    Date.parse(@start_date) if @start_date
   end
 
   # Return an object instead of a string
   def end_date
-    Date.parse(@end_date)
+    Date.parse(@end_date) if @end_date
   end
 
   # TODO: blow up the categories into something useful
@@ -48,15 +48,9 @@ class Challenge < ApiModel
     @categories || 'nil'
   end
 
-  # has_many :participants
+  has_many :participants
   # Note that we're not using the participants data in the json because it
   # lacks many attributes. We simply just do another api call.
-  # Also, note that we're assigning the challenge field to self
-  def participants
-    self.class.raw_get([challenge_id, 'participants']).map do |participant|
-      Participant.new(participant).tap { |p| p.challenge = self} 
-    end
-  end
 
   # has_one :status
   # TODO (this requires authentication)

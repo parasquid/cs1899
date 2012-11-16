@@ -12,6 +12,27 @@ class ApiModel
     define_method(entity.to_sym) do
       klass = entity.to_s.classify.constantize
       klass.raw_get([to_param, entity.to_s]).map do |e|
+        next if e.respond_to?(:last) # we got an array instead of a Hashie::Mash
+        klass.new e
+      end
+    end
+  end
+
+  # Implements the has and belongs to many relationship
+  # Passing :parent as an option allows modification of the calling class
+  # This is used mostly for has and belongs to many relationships, where
+  # a model collection will have a different endpoint
+  # Case in point: Members and Challenges
+  def self.habtm(entity, options = {})
+    # add in this relationship to the column_names table
+    @column_names << entity.to_sym
+    parent = options[:parent]
+
+    # dynamically create a method on this instance that will reference the collection
+    define_method(entity.to_sym) do
+      klass = entity.to_s.classify.constantize
+      (parent || klass).raw_get([to_param, entity.to_s]).map do |e|
+        next if e.respond_to?(:last) # we got an array instead of a Hashie::Mash
         klass.new e
       end
     end
@@ -71,9 +92,13 @@ class ApiModel
   end
 
   # Convenience method to request an entity from the CloudSpokes RESTful source
+  # Accepts an array or a string
+  # If given an array, will join the elements with '/'
+  # If given a string, will use the argument as is
   def self.raw_get(entities = [])
     entities = Array.new(1, entities) unless entities.respond_to? :join
     endpoint = "#{api_endpoint}/#{entities.join('/')}"
+    Rails.logger.debug "calling api endpoint #{endpoint}"
     Rails.cache.fetch("#{endpoint}", expires_in: ENDPOINT_EXPIRY.minutes) do
       Hashie::Mash.new(JSON.parse(RestClient.get "#{endpoint}"))
       .response # we're only interested in the response portion of the reply

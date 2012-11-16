@@ -1,6 +1,6 @@
 class Participant < ApiModel
   def self.api_endpoint
-    raise 'we don\'t have an endpoint because we are depending on challenge'
+    APP_CONFIG[:cs_api][:challenges]
   end
 
   attr_accessor :id, :attributes, :has_submission, :member, :status, :challenge
