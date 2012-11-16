@@ -1,5 +1,15 @@
+config.yml
+
 heroku apps:create <my-app>
 heroku addons:add heroku-postgresql:dev
 heroku run rake db:version
-heroku run rake --trace db:migrate
+heroku run rake db:migrate --trace
+heroku run rake db:seed
+git push heroku master
 heroku restart
+heroku open
+
+admin
+admin@example.com
+madmin
+madmin
