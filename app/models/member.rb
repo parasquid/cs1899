@@ -9,10 +9,6 @@ class Member < ApiModel
     APP_CONFIG[:cs_api][:members]
   end
 
-  def self.find(entity)
-    Member.new(raw_get entity)
-  end
-
   # Used for resourceful routes (instead of id)
   def to_param
     name

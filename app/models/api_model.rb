@@ -32,6 +32,11 @@ class ApiModel
     all.first
   end
 
+  # Finds an entity
+  def self.find(entity)
+    Kernel.const_get(self.name).new(raw_get entity)
+  end
+
   # Wrap initialize with a sanitation clause
   def initialize(params={})
     params.delete_if {|k, v| !self.class.column_names.include? k.to_sym}

@@ -16,10 +16,6 @@ class Challenge < ApiModel
     APP_CONFIG[:cs_api][:challenges]
   end
 
-  def self.find(entity)
-    Challenge.new(raw_get entity)
-  end
-
   # Used for resourceful routes (instead of id)
   def to_param
     challenge_id
@@ -41,7 +37,11 @@ class Challenge < ApiModel
   end
 
   # has_many :comments
+  # Note that the json does not expose this method
   def comments
+    self.class.raw_get([challenge_id, 'comments'].join('/')).map do |comment|
+      Comment.new comment
+    end
   end
 
   # has_many :participants

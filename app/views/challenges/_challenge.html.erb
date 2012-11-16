@@ -1,0 +1,5 @@
+<tr>
+  <% Challenge.column_names.each do |column| %>
+    <td><%= link_to challenge.send(column), challenge %></td>
+  <% end %>
+</tr>
