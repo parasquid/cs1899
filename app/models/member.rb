@@ -25,6 +25,19 @@ class Member
     end
   end
 
+  def self.find(member_name)
+    member = Hashie::Mash.new(JSON.parse(RestClient.get "#{APP_CONFIG[:cs_api][:members]}/#{member_name}")).response
+    m = Member.new(member.to_hash.delete_if {|k, v| !column_names.include? k.to_sym})
+  end
+
+  def persisted?
+    !!id
+  end
+
+  def to_param
+    name
+  end
+
 end
 
 # {

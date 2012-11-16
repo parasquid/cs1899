@@ -1,5 +1,5 @@
 <tr>
   <% Member.column_names.each do |column| %>
-    <td><%= member.send(column) %></td>
+    <td><%= link_to member.send(column), member %></td>
   <% end %>
 </tr>
