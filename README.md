@@ -5,7 +5,7 @@ Clone the repository
     git clone git://github.com/parasquid/cs1899.git
     cd cs1876
 
-Edit the config.yml and specify your endpoints
+Edit the config.yml and specify your endpoints and how long the app will cache the api endpoint responses
 
 Create your app on heroku
 
