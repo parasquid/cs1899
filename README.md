@@ -27,7 +27,7 @@ You can now use the application
 
 		heroku open
 
-A [sample](http://parasquid-cs1899.herokuapp.com/) application has alreayd been setup. The login details are:
+A [sample](http://parasquid-cs1899.herokuapp.com/) application has already been setup. The login details are:
 
 		username: admin
 		email: admin@example.com

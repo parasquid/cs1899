@@ -77,3 +77,5 @@ end
 
 gem 'rest-client', '1.6.7', require: 'rest_client'
 gem 'hashie', '1.2.0'
+
+gem 'newrelic_rpm'
