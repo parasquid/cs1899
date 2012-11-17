@@ -27,3 +27,18 @@
     <%= render @challenge.participants %>
   </tbody>
 </table>
+
+<h2>Comments</h2>
+
+<table class='table table-striped'>
+  <thead>
+    <tr>
+      <% Comment.column_names.each do |column| %>
+        <th><%= column.to_s.humanize %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @challenge.comments %>
+  </tbody>
+</table>
