@@ -3,7 +3,7 @@ class Challenge < ApiModel
     :prize_type, :total_prize_money, :top_prize,
     :start_date, :end_date,
     :name, :description, :status,
-    :categories, :status
+    :categories
 
   has_many :comments
 
