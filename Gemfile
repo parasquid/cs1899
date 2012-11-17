@@ -20,6 +20,7 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+	gem 'compass', git: 'git://github.com/chriseppstein/compass.git'
 end
 
 gem 'jquery-rails', '~> 2.0.0'
@@ -32,7 +33,6 @@ gem 'refinerycms', '2.0.8'
 gem 'refinerycms-bootstrap', git: 'git://github.com/ghoppe/refinerycms-bootstrap.git'
 
 # gems from old site's gemfile
-gem 'compass', git: 'git://github.com/chriseppstein/compass.git'
 gem 'databasedotcom'
 gem 'databasedotcom-rails'
 gem 'haml'
