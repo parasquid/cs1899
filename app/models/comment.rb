@@ -1,4 +1,4 @@
-class Comment < ApiModel
+class Comment < CloudSpokes::ApiModel
   attr_accessor :id, :attributes,
   	:comment, :createddate, :member
 

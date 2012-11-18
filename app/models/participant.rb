@@ -1,4 +1,4 @@
-class Participant < ApiModel
+class Participant < CloudSpokes::ApiModel
   def self.api_endpoint
     APP_CONFIG[:cs_api][:challenges]
   end

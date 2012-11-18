@@ -1,4 +1,4 @@
-class Challenge < ApiModel
+class Challenge < CloudSpokes::ApiModel
   attr_accessor :id, :challenge_id, :challenge_type, :attributes,
     :prize_type, :total_prize_money, :top_prize,
     :start_date, :end_date,

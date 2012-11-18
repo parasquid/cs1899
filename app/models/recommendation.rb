@@ -1,4 +1,4 @@
-class Recommendation < ApiModel
+class Recommendation < CloudSpokes::ApiModel
   attr_accessor :id, :attributes,
   :recommendation, :createddate, :from
 
