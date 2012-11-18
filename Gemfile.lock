@@ -24,6 +24,14 @@ GIT
     ruby-openid (2.1.8)
 
 GIT
+  remote: git://github.com/parasquid/cloud_spokes_api_model.git
+  revision: 8c79f06a6c98e1f4f85fa1d9fca899c763d6df77
+  specs:
+    cloud_spokes_api_model (0.0.1)
+      activemodel (~> 3.2.8)
+      rails (~> 3.2.8)
+
+GIT
   remote: http://github.com/hone/resque.git
   revision: c528f41f384b904296ef42df59e162747269df0a
   branch: keepalive
@@ -392,6 +400,7 @@ DEPENDENCIES
   annotate (= 2.4.0)
   aws-s3
   bootstrap-sass (= 2.1.1.0)
+  cloud_spokes_api_model!
   coffee-rails (~> 3.2.1)
   compass!
   dalli

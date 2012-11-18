@@ -1,4 +1,4 @@
-class Member < ApiModel
+class Member < CloudSpokes::ApiModel
   attr_accessor :id, :name, :profile_pic, :attributes,
     :challenges_entered, :active_challenges,
     :total_1st_place, :total_2nd_place, :total_3st_place,
